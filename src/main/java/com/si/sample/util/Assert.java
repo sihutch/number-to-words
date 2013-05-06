@@ -16,7 +16,7 @@ public final class Assert {
      * @throws IllegalArgumentException
      *             if {@code value} is null
      */
-    public static final void notNull(final Object value) {
+    public static void notNull(final Object value) {
         if (value == null) {
             throw new IllegalArgumentException("Value cannot be null");
         }

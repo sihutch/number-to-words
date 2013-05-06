@@ -4,13 +4,13 @@ import static org.junit.Assert.assertNotNull;
 
 import com.si.sample.util.StringUtils;
 
-public class CompositePowerConverter extends AbstractNumberToWordConverter {
+class CompositePowerConverter extends AbstractNumberToWordConverter {
 
     private NumberToWordConverter converter;
     private final NumberToWordConverter hundredsConverter;
     private final Magnitude magnitude;
 
-    public CompositePowerConverter(final Magnitude magnitude) {
+    CompositePowerConverter(final Magnitude magnitude) {
         hundredsConverter = new HundredsConverter();
         this.magnitude = magnitude;
         if (magnitude.getPowerOfTen() < Magnitude.THOUSAND.getPowerOfTen()) {
@@ -21,10 +21,11 @@ public class CompositePowerConverter extends AbstractNumberToWordConverter {
     }
 
     @Override
-    public String convert(final String number) throws NumberFormatException {
+    public String convert(final String number) {
         assertNotNull(number);
         final StringBuilder sb = new StringBuilder();
 
+        // TODO Change these method names
         final String mag, rest;
         if (magnitude.getPowerOfTen() < number.length()) {
             final int index = number.length() - magnitude.getPowerOfTen();

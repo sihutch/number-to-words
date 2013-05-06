@@ -1,24 +1,29 @@
 package com.si.sample;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 public class CompositePowerConverterTest {
 
-    final NumberToWordConverter powerConverter = new CompositePowerConverter(Magnitude.MILLION);
+    final NumberToWordConverter converter = new CompositePowerConverter(Magnitude.MILLION);
 
     @Test
     public void testConvertLessThanAThousand() {
-        TestHelper.convertHundreds(powerConverter);
-        TestHelper.convertTens(powerConverter);
-        TestHelper.convertUnits(powerConverter);
+        TestHelper.convertHundreds(converter);
+        TestHelper.convertTens(converter);
+        TestHelper.convertUnits(converter);
     }
 
     @Test
     public void testConvertMaximum() {
         final String input = "999999999";
         final String expected = "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine";
-        assertEquals(expected, powerConverter.convert(input));
+        TestHelper.assertAsStringAndLong(converter, expected, input);
+    }
+
+    @Test
+    public void testTrailingZeros() {
+        final String input = "900000000";
+        final String expected = "nine hundred million";
+        TestHelper.assertAsStringAndLong(converter, expected, input);
     }
 }

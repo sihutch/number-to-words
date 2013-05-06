@@ -13,25 +13,26 @@ public enum Magnitude {
     /**
      * Represents 10^0
      */
-    ONE(0),
+    ONE(1),
     /**
      * Represents 10^1
      */
-    TEN(1),
+    TEN(10),
     /**
      * Represents 10^2
      */
-    HUNDRED(2),
+    HUNDRED(100),
     /**
      * Represents 10^3
      */
-    THOUSAND(3),
+    THOUSAND(1000),
     /**
      * Represents 10^6
      */
-    MILLION(6);
+    MILLION(1000000);
 
     private int power;
+    private int value;
 
     private static final Map<Integer, Magnitude> POWER_TO_MAGNITUDE;
     static {
@@ -43,8 +44,9 @@ public enum Magnitude {
         POWER_TO_MAGNITUDE = Collections.unmodifiableMap(map);
     }
 
-    private Magnitude(final int power) {
-        this.power = power;
+    private Magnitude(final int value) {
+        this.value = value;
+        this.power = (int)Math.log10(value);
     }
 
     /**
@@ -69,8 +71,8 @@ public enum Magnitude {
      * @return The {@link Magnitude} or null if there is no {@link Magnitude}
      *         for the given {@code power}
      */
-    public Magnitude fromPowerOfTen(final int powerOfTen) {
-        return POWER_TO_MAGNITUDE.get(power);
+    public static Magnitude fromPowerOfTen(final int powerOfTen) {
+        return POWER_TO_MAGNITUDE.get(powerOfTen);
     }
 
     /**
@@ -93,5 +95,13 @@ public enum Magnitude {
      */
     public boolean isGreaterThan(final Magnitude magnitude) {
         return getPowerOfTen() > magnitude.getPowerOfTen();
+    }
+
+    /**
+     * 
+     * @return The int value of this {@link Magnitude}
+     */
+    public int getValue() {
+        return value;
     }
 }

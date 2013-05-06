@@ -9,7 +9,7 @@ import com.si.sample.util.StringUtils;
  *         Processor that can convert the numbers from 1 through 999 to the
  *         corresponding words
  */
-public class HundredsConverter extends AbstractNumberToWordConverter {
+class HundredsConverter extends AbstractNumberToWordConverter {
 
     /**
      * Basic conjunction string constant
@@ -27,19 +27,19 @@ public class HundredsConverter extends AbstractNumberToWordConverter {
 
     // TODO: Add java doc
     @Override
-    public String convert(final String number) throws NumberFormatException {
+    public String convert(final String number) {
         Assert.notNull(number);
         final StringBuffer sb = new StringBuffer();
         final int num = StringUtils.empty(number) ? 0 : StringUtils.stripInt(number, RIGHT_OFFSET);
 
-        if (num >= 100) {
-            sb.append(unitAndTeensConverter.convert(num / 100));
+        if (num >= Magnitude.HUNDRED.getValue()) {
+            sb.append(unitAndTeensConverter.convert(num / Magnitude.HUNDRED.getValue()));
             sb.append(SEPARATOR);
             sb.append(Magnitude.HUNDRED.getName());
         }
 
-        final String tens = tensConverter.convert(num % 100);
-        if (StringUtils.notEmpty(tens) && num >= 100) {
+        final String tens = tensConverter.convert(num % Magnitude.HUNDRED.getValue());
+        if (StringUtils.notEmpty(tens) && num >= Magnitude.HUNDRED.getValue()) {
             sb.append(CONJUNCTION_AND);
         }
         sb.append(tens);

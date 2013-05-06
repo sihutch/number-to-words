@@ -5,7 +5,10 @@ package com.si.sample.util;
  * 
  *         Utility methods specific to numbers
  */
-public class NumberUtils {
+public final class NumberUtils {
+
+    private NumberUtils() {
+    }
 
     /**
      * Test that a number is between two values inclusive

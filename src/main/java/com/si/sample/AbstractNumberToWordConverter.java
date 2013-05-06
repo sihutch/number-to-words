@@ -8,6 +8,7 @@ package com.si.sample;
  */
 public abstract class AbstractNumberToWordConverter implements NumberToWordConverter {
 
+    // TODO: Move these into a constants class
     /**
      * Zero length string
      */
@@ -16,6 +17,11 @@ public abstract class AbstractNumberToWordConverter implements NumberToWordConve
      * String with a single space character
      */
     public static final String SEPARATOR = " ";
+
+    /**
+     * Word for zero
+     */
+    public static final String ZERO = "zero";
 
     /**
      * Convert the provide {@code number to a String} and then delegate to the

@@ -7,7 +7,10 @@ package com.si.sample.util;
  *         Utility methods specific to Strings
  * 
  */
-public class StringUtils {
+public final class StringUtils {
+
+    private StringUtils() {
+    }
 
     /**
      * Convert the right substring of a {@link String} of digits into a int.
@@ -21,12 +24,9 @@ public class StringUtils {
      *            greater than {@code rightOffset} otherwise the value of
      *            {@code numberString} can be handled directly
      * @return The int value of the stripped string.
-     * @throws NumberFormatException
-     *             If the characters stripped from the string cannot be
-     *             converted to an int
+     * 
      */
-    public static int stripInt(final String numberString, final int rightOffset)
-        throws NumberFormatException {
+    public static int stripInt(final String numberString, final int rightOffset) {
         Assert.notNull(numberString);
         Assert.greaterThan(0, rightOffset);
         final int num;

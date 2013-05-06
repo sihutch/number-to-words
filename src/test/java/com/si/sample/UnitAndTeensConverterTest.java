@@ -1,7 +1,5 @@
 package com.si.sample;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,13 +29,13 @@ public class UnitAndTeensConverterTest {
     public void testConvertLarger() {
         final String expected = "fifteen";
         final String input = "99915";
-        assertEquals(expected, converter.convert(input));
+        TestHelper.assertAsStringAndLong(converter, expected, input);
     }
 
     @Test
     public void testOutOfRange() {
         final String expected = "";
         final String input = "999";
-        assertEquals(expected, converter.convert(input));
+        TestHelper.assertAsStringAndLong(converter, expected, input);
     }
 }

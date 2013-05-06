@@ -10,7 +10,7 @@ public class TestHelper {
             "eleven", "twelve", "thirteen", "forteen", "fifteen",
             "sixteen", "seventeen", "eighteen", "nineteen" };
         for (int i = 1; i < 10; i++) {
-            assertEquals(expectedWords[i - 1], converter.convert(String.valueOf(i)));
+            assertAsStringAndLong(converter, expectedWords[i - 1], String.valueOf(i));
         }
     }
 
@@ -19,14 +19,20 @@ public class TestHelper {
             "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"
         };
         for (int i = 20; i <= 90; i += 10) {
-            assertEquals(expectedWords[(i / 10) - 2], converter.convert(String.valueOf(i)));
+            assertAsStringAndLong(converter, expectedWords[(i / 10) - 2], String.valueOf(i));
         }
     }
 
     public static void convertHundreds(final NumberToWordConverter converter) {
-        assertEquals("one hundred", converter.convert(100));
-        assertEquals("one hundred and eleven", converter.convert(111));
-        assertEquals("one hundred and one", converter.convert(101));
-        assertEquals("nine hundred and ninety nine", converter.convert(999));
+        assertAsStringAndLong(converter, "one hundred", "100");
+        assertAsStringAndLong(converter, "one hundred and eleven", "111");
+        assertAsStringAndLong(converter, "one hundred and one", "101");
+        assertAsStringAndLong(converter, "nine hundred and ninety nine", "999");
+    }
+
+    public static void assertAsStringAndLong(final NumberToWordConverter converter,
+        final String expectedWords, final String value) {
+        assertEquals(expectedWords, converter.convert(value));
+        assertEquals(expectedWords, converter.convert(Long.valueOf(value)));
     }
 }
