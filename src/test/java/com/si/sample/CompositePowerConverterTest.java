@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class CompositePowerConverterTest {
 
-    final NumberToWordConverter powerConverter = new CompositePowerConverter(6);
+    final NumberToWordConverter powerConverter = new CompositePowerConverter(Magnitude.MILLION);
 
     @Test
     public void testConvertLessThanAThousand() {
@@ -17,10 +17,6 @@ public class CompositePowerConverterTest {
 
     @Test
     public void testConvertMaximum() {
-        TestHelper.convertHundreds(powerConverter);
-        TestHelper.convertTens(powerConverter);
-        TestHelper.convertUnits(powerConverter);
-
         final String input = "999999999";
         final String expected = "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine";
         assertEquals(expected, powerConverter.convert(input));

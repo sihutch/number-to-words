@@ -6,18 +6,17 @@ import com.si.sample.util.StringUtils;
 
 public class CompositePowerConverter extends AbstractNumberToWordConverter {
 
-    private static final int THOUSAND_POWER = 3;
     private NumberToWordConverter converter;
     private final NumberToWordConverter hundredsConverter;
-    private int power;
+    private final Magnitude magnitude;
 
-    public CompositePowerConverter(final int power) {
+    public CompositePowerConverter(final Magnitude magnitude) {
         hundredsConverter = new HundredsConverter();
-        if (power < THOUSAND_POWER) {
+        this.magnitude = magnitude;
+        if (magnitude.getPowerOfTen() < Magnitude.THOUSAND.getPowerOfTen()) {
             converter = new HundredsConverter();
         } else {
-            converter = new CompositePowerConverter(power - 3);
-            this.power = power;
+            converter = new CompositePowerConverter(magnitude.subtract(Magnitude.THOUSAND));
         }
     }
 
@@ -26,26 +25,26 @@ public class CompositePowerConverter extends AbstractNumberToWordConverter {
         assertNotNull(number);
         final StringBuilder sb = new StringBuilder();
 
-        final String magnitude, rest;
-        if (power < number.length()) {
-            final int index = number.length() - power;
-            magnitude = number.substring(0, index);
+        final String mag, rest;
+        if (magnitude.getPowerOfTen() < number.length()) {
+            final int index = number.length() - magnitude.getPowerOfTen();
+            mag = number.substring(0, index);
             rest = number.substring(index);
         } else {
-            magnitude = EMPTY;
+            mag = EMPTY;
             rest = number;
         }
 
-        final String magnitudeValue = hundredsConverter.convert(magnitude);
+        final String magnitudeValue = hundredsConverter.convert(mag);
         final String remainingValue = converter.convert(rest);
 
         if (StringUtils.notEmpty(magnitudeValue)) {
             sb.append(magnitudeValue);
-            final String magnitudeName = Magnitude.getName(power);
-            if (magnitudeName != null) {
+            if (magnitude.isGreaterThan(Magnitude.TEN)) {
                 sb.append(SEPARATOR);
-                sb.append(Magnitude.getName(power));
+                sb.append(magnitude.getName());
             }
+
             if (StringUtils.notEmpty(remainingValue)) {
                 sb.append(SEPARATOR);
             }

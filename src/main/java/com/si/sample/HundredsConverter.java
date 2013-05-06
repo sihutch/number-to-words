@@ -11,7 +11,6 @@ import com.si.sample.util.StringUtils;
  */
 public class HundredsConverter extends AbstractNumberToWordConverter {
 
-    private static final String HUNDRED = Magnitude.getName(2);
     /**
      * Basic conjunction string constant
      */
@@ -36,7 +35,7 @@ public class HundredsConverter extends AbstractNumberToWordConverter {
         if (num >= 100) {
             sb.append(unitAndTeensConverter.convert(num / 100));
             sb.append(SEPARATOR);
-            sb.append(HUNDRED);
+            sb.append(Magnitude.HUNDRED.getName());
         }
 
         final String tens = tensConverter.convert(num % 100);
