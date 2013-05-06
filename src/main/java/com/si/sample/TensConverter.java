@@ -10,9 +10,10 @@ import com.si.sample.util.StringUtils;
  *         Processor that can convert the numbers from 1 through 99 to the
  *         corresponding words
  */
-public class TensConverter implements NumberToWordConverter {
+public class TensConverter extends AbstractNumberToWordConverter {
 
     private final NumberToWordConverter unitAndTeensConverter = new UnitAndTeensConverter();
+    public static final String CONJUNCTION_AND = " and ";
 
     private static final String[] NUMBER_WORDS = {
         "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"
@@ -23,11 +24,25 @@ public class TensConverter implements NumberToWordConverter {
     @Override
     public String convert(final String number) throws NumberFormatException {
         Assert.notNull(number);
-        String text = "";
-        final int num = StringUtils.stripInt(number, RIGHT_OFFSET);
-        if (NumberUtils.isBetween(1, 19, num)) {
-            text = NUMBER_WORDS[num - 1];
+        final StringBuffer sb = new StringBuffer();
+        int num = NumberUtils.keepDigits(StringUtils.stripInt(number, RIGHT_OFFSET), 2);
+        if (num >= 20) {
+            sb.append(NUMBER_WORDS[((num / 10) - 2)]);
+            // Keep a single digit for the unit converter
+            num = NumberUtils.keepDigits(num, 1);
+        } else {
+            num %= 20;
         }
-        return text;
+        if (num != 0) {
+            convertUnits(sb, num);
+        }
+        return sb.toString();
+    }
+
+    private void convertUnits(final StringBuffer sb, final int num) {
+        if (sb.length() > 0) {
+            sb.append(" ");
+        }
+        sb.append(unitAndTeensConverter.convert(num));
     }
 }

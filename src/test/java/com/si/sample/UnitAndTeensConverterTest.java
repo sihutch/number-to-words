@@ -21,13 +21,7 @@ public class UnitAndTeensConverterTest {
 
     @Test
     public void testConvert() {
-        final String[] expectedWords = { "", "one", "two", "three", "four", "five",
-            "six", "seven", "eight", "nine", "ten",
-            "eleven", "twelve", "thirteen", "forteen", "fifteen",
-            "sixteen", "seventeen", "eighteen", "nineteen" };
-        for (int i = 1; i < 10; i++) {
-            assertEquals(expectedWords[i], converter.convert(String.valueOf(i)));
-        }
+        TestHelper.convertUnits(converter);
     }
 
     /**

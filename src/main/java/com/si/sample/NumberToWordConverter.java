@@ -23,4 +23,6 @@ public interface NumberToWordConverter {
      *             number
      */
     String convert(String number) throws NumberFormatException;
+
+    String convert(long number) throws NumberFormatException;
 }

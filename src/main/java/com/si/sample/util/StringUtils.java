@@ -37,4 +37,27 @@ public class StringUtils {
         }
         return num;
     }
+
+    /**
+     * Test whether a string is null or simply whitespace
+     * 
+     * @param s
+     *            The {@link String} to test
+     * @return true if the string is null or simply whitespace otherwise false
+     */
+    public static boolean empty(final String s) {
+        return s == null || s.trim().equals("");
+    }
+
+    /**
+     * Test whether a string has at least one non-whitespace character
+     * 
+     * @param s
+     *            The {@link String} to test
+     * @return true if the string has at least one non-whitespace character
+     *         otherwise false
+     */
+    public static boolean notEmpty(final String s) {
+        return !empty(s);
+    }
 }

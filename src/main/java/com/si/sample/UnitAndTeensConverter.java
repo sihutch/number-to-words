@@ -8,7 +8,7 @@ import com.si.sample.util.StringUtils;
  * @author Simon Hutchinson Processor that can convert the numbers 1 to 19 to
  *         the corresponding word
  */
-public class UnitAndTeensConverter implements NumberToWordConverter {
+public class UnitAndTeensConverter extends AbstractNumberToWordConverter {
 
     private static final String[] NUMBER_WORDS = { "one", "two", "three", "four", "five",
         "six", "seven", "eight", "nine", "ten",
