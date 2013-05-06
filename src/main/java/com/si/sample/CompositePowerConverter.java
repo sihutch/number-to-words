@@ -4,18 +4,19 @@ import static org.junit.Assert.assertNotNull;
 
 import com.si.sample.util.StringUtils;
 
-public class PowerConverter extends AbstractNumberToWordConverter {
+public class CompositePowerConverter extends AbstractNumberToWordConverter {
 
+    private static final int THOUSAND_POWER = 3;
     private NumberToWordConverter converter;
     private final NumberToWordConverter hundredsConverter;
     private int power;
 
-    public PowerConverter(final int power) {
+    public CompositePowerConverter(final int power) {
         hundredsConverter = new HundredsConverter();
-        if (power < 3) {
+        if (power < THOUSAND_POWER) {
             converter = new HundredsConverter();
         } else {
-            converter = new PowerConverter(power - 3);
+            converter = new CompositePowerConverter(power - 3);
             this.power = power;
         }
     }
@@ -31,24 +32,27 @@ public class PowerConverter extends AbstractNumberToWordConverter {
             magnitude = number.substring(0, index);
             rest = number.substring(index);
         } else {
-            magnitude = "";
+            magnitude = EMPTY;
             rest = number;
         }
 
         final String magnitudeValue = hundredsConverter.convert(magnitude);
-        final String restValue = converter.convert(rest);
+        final String remainingValue = converter.convert(rest);
 
         if (StringUtils.notEmpty(magnitudeValue)) {
             sb.append(magnitudeValue);
             final String magnitudeName = Magnitude.getName(power);
             if (magnitudeName != null) {
-                sb.append(" ");
+                sb.append(SEPARATOR);
                 sb.append(Magnitude.getName(power));
+            }
+            if (StringUtils.notEmpty(remainingValue)) {
+                sb.append(SEPARATOR);
             }
         }
 
-        if (StringUtils.notEmpty(restValue)) {
-            sb.append(restValue);
+        if (StringUtils.notEmpty(remainingValue)) {
+            sb.append(remainingValue);
         }
 
         return sb.toString();

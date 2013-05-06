@@ -1,7 +1,7 @@
 package com.si.sample;
 
 /**
- * @author si
+ * @author Simon Hutchinson
  * 
  *         A converter that will convert a number string to its equivalent in
  *         words
@@ -24,5 +24,12 @@ public interface NumberToWordConverter {
      */
     String convert(String number) throws NumberFormatException;
 
-    String convert(long number) throws NumberFormatException;
+    /**
+     * Convert the supplied {@code number} string to its corresponding words
+     * 
+     * @param number
+     *            The number to convert
+     * @return The number converted to words
+     */
+    String convert(long number);
 }

@@ -3,6 +3,7 @@ package com.si.sample;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Simon Hutchinson
@@ -21,7 +22,7 @@ public class Magnitude {
     }
 
     /**
-     * Get the english name of a power of ten
+     * Get the name (in english) of a power of ten
      * 
      * @param power
      *            The power of ten
@@ -29,5 +30,9 @@ public class Magnitude {
      */
     public static String getName(final int power) {
         return magnitudes.get(power);
+    }
+
+    public static Set<Integer> getPowers() {
+        return magnitudes.keySet();
     }
 }

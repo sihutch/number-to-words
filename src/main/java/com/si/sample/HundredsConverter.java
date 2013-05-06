@@ -11,17 +11,22 @@ import com.si.sample.util.StringUtils;
  */
 public class HundredsConverter extends AbstractNumberToWordConverter {
 
+    private static final String HUNDRED = Magnitude.getName(2);
+    /**
+     * Basic conjunction string constant
+     */
+    public static final String CONJUNCTION_AND = " and ";
+
+    /**
+     * The offset to use when stripping int value from the right of the provided
+     * number string
+     */
+    private static final int RIGHT_OFFSET = 3;
+
     private final NumberToWordConverter tensConverter = new TensConverter();
     private final NumberToWordConverter unitAndTeensConverter = new UnitAndTeensConverter();
 
-    public static final String CONJUNCTION_AND = " and ";
-
-    private static final String[] NUMBER_WORDS = {
-        "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"
-    };
-
-    private static final int RIGHT_OFFSET = 3;
-
+    // TODO: Add java doc
     @Override
     public String convert(final String number) throws NumberFormatException {
         Assert.notNull(number);
@@ -30,8 +35,8 @@ public class HundredsConverter extends AbstractNumberToWordConverter {
 
         if (num >= 100) {
             sb.append(unitAndTeensConverter.convert(num / 100));
-            sb.append(" ");
-            sb.append(Magnitude.getName(2));
+            sb.append(SEPARATOR);
+            sb.append(HUNDRED);
         }
 
         final String tens = tensConverter.convert(num % 100);
