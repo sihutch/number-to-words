@@ -1,31 +1,31 @@
 package com.si.sample;
 
+import java.text.ParseException;
+
 /**
  * @author Simon Hutchinson
  * 
  *         A converter that will convert a number to its equivalent in words
  * 
- *         For example, given the string "101" the processor will return
- *         "one hundred and one"
- * 
  */
 public interface NumberToWordConverter {
 
     /**
-     * Convert the supplied {@code number} string to its corresponding words
+     * Convert the supplied string of digits to its corresponding words
      * 
      * @param number
-     *            The number string to convert
+     *            The string of digits to convert
      * @return The number converted to words
+     * @throws ParseException
      */
-    String convert(String number);
+    String convert(String number) throws ParseException;
 
     /**
-     * Convert the supplied {@code number} string to its corresponding words
+     * Convert the supplied {@code number} to its corresponding words
      * 
      * @param number
-     *            The number to convert
-     * @return The number converted to words
+     *            The long to convert
+     * @return The long converted to words
      */
     String convert(long number);
 }

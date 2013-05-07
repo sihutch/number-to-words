@@ -8,28 +8,32 @@ import com.si.sample.util.StringUtils;
  * @author Simon Hutchinson Processor that can convert the numbers 1 to 19 to
  *         the corresponding word
  */
-class UnitAndTeensConverter extends AbstractNumberToWordConverter {
+class SubTwentyConverter extends AbstractNumberToWordConverter {
 
-    private static final int MIN_CONVERT_VALUE = 1;
-    private static final int MAX_CONVERT_VALUE = 19;
+    public static final int MIN_CONVERT_VALUE = 1;
+    public static final int MAX_CONVERT_VALUE = 19;
 
     private static final String[] NUMBER_WORDS = { "one", "two", "three", "four", "five",
         "six", "seven", "eight", "nine", "ten",
         "eleven", "twelve", "thirteen", "forteen", "fifteen",
         "sixteen", "seventeen", "eighteen", "nineteen" };
+
+    /**
+     * The maximum string of digits to attempt to strip from the right of the
+     * provided string
+     */
     private static final int RIGHT_OFFSET = 2;
 
     /**
-     * Convert the last 2 characters from the provided string to the
-     * corresponding words between the values of one to nineteen.
+     * Convert the last 1-2 digits from the provided string to the corresponding
+     * words between the values of 1 to 19.
      * 
-     * For example give the String "9113" Return "thirteen"
+     * For example given the String "9113" Return "thirteen"
      * 
      * @param number
-     *            - The number string to process
-     * @return The corresponding word for the string of numbers. Or if the
-     *         string of numbers is outside of this range then return an empty
-     *         string
+     *            - The string of digits to process
+     * @return The corresponding word(s) for the string of digits. Or if the
+     *         numbers are outside of the range 1-19 then return an empty string
      */
     @Override
     public String convert(final String number) {

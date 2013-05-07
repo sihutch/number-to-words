@@ -2,9 +2,13 @@ package com.si.sample;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.ParseException;
+
 public class TestHelper {
 
-    public static void convertUnits(final NumberToWordConverter converter) {
+    public static final String MAXIMUM_VALUE_IN_WORDS = "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine";
+
+    public static void convertUnits(final NumberToWordConverter converter) throws ParseException {
         final String[] expectedWords = { "one", "two", "three", "four", "five",
             "six", "seven", "eight", "nine", "ten",
             "eleven", "twelve", "thirteen", "forteen", "fifteen",
@@ -14,7 +18,7 @@ public class TestHelper {
         }
     }
 
-    public static void convertTens(final NumberToWordConverter converter) {
+    public static void convertTens(final NumberToWordConverter converter) throws ParseException {
         final String[] expectedWords = {
             "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"
         };
@@ -23,7 +27,7 @@ public class TestHelper {
         }
     }
 
-    public static void convertHundreds(final NumberToWordConverter converter) {
+    public static void convertHundreds(final NumberToWordConverter converter) throws ParseException {
         assertAsStringAndLong(converter, "one hundred", "100");
         assertAsStringAndLong(converter, "one hundred and eleven", "111");
         assertAsStringAndLong(converter, "one hundred and one", "101");
@@ -31,7 +35,7 @@ public class TestHelper {
     }
 
     public static void assertAsStringAndLong(final NumberToWordConverter converter,
-        final String expectedWords, final String value) {
+        final String expectedWords, final String value) throws ParseException {
         assertEquals(expectedWords, converter.convert(value));
         assertEquals(expectedWords, converter.convert(Long.valueOf(value)));
     }

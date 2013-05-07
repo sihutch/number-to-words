@@ -1,24 +1,26 @@
 package com.si.sample;
 
+import java.text.ParseException;
+
 import org.junit.Before;
 import org.junit.Test;
 
-public class TensConverterTest {
+public class SubOneHundredConverterTest {
 
     NumberToWordConverter converter;
 
     @Before
     public void setup() {
-        converter = new TensConverter();
+        converter = new SubOneHundredConverter();
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testNull() {
+    public void testNull() throws ParseException {
         converter.convert(null);
     }
 
     @Test
-    public void testConvert() {
+    public void testConvert() throws ParseException {
         TestHelper.convertTens(converter);
         TestHelper.convertUnits(converter);
     }

@@ -1,0 +1,10 @@
+Program to convert numbers in the range -999,999,999 to 999,999,999 
+to their equivalent British English words
+
+To compile and run using Maven:
+
+mvn compile exec:java -Dexec.mainClass="com.si.sample.Main" -Dexec.args="1399999"
+
+Tests can be run with:
+
+mvn test
