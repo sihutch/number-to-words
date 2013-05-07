@@ -33,7 +33,7 @@ class MagnitudeConverter extends AbstractNumberToWordConverter {
         Assert.notNull(magnitude);
         subOneThousandConverter = new SubOneThousandConverter();
         this.magnitude = magnitude;
-        if (magnitude.getPowerOfTen() < Magnitude.THOUSAND.getPowerOfTen()) {
+        if (magnitude.isLessThan(Magnitude.THOUSAND)) {
             converter = new SubOneThousandConverter();
         } else {
             // Recursively construct subtracting 10 ^ 3
@@ -61,6 +61,13 @@ class MagnitudeConverter extends AbstractNumberToWordConverter {
         final String magnitudeConverted = subOneThousandConverter.convert(magnitudeDigits);
         final String remainderConverted = converter.convert(remainderDigits);
 
+        appendValues(sb, magnitudeConverted, remainderConverted);
+
+        return sb.toString();
+    }
+
+    private void appendValues(final StringBuilder sb, final String magnitudeConverted,
+        final String remainderConverted) {
         if (StringUtils.notEmpty(magnitudeConverted)) {
             sb.append(magnitudeConverted);
             if (magnitude.isGreaterThan(Magnitude.TEN)) {
@@ -76,7 +83,5 @@ class MagnitudeConverter extends AbstractNumberToWordConverter {
         if (StringUtils.notEmpty(remainderConverted)) {
             sb.append(remainderConverted);
         }
-
-        return sb.toString();
     }
 }

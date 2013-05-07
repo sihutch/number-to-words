@@ -9,18 +9,26 @@ import com.si.sample.util.Constants;
 import com.si.sample.util.StringUtils;
 
 /**
- * Convert a number in the range -999,999,999 to 999,999,999 to the equivalent
- * British English words. Decimal values are not supported are simply ignored if
- * provided i.e the String 10.99 is simply treated as 10
+ * Converter that will convert a number to the equivalent British English words
  * 
  * @author Simon Hutchinson
  * 
  */
 public class BritishEnglishNumberToWordConverter extends AbstractNumberToWordConverter {
 
+    /**
+     * Construct a {@link MagnitudeConverter} with the maximum magnitude that
+     * the converter can support
+     */
     private final NumberToWordConverter magnitudeConverter = new MagnitudeConverter(
         Magnitude.MILLION);
 
+    /**
+     * Convert a number in the range -999,999,999 to 999,999,999 to the
+     * equivalent British English words. Decimal values are not supported and
+     * are simply ignored if provided i.e the String 10.99 is simply treated as
+     * 10
+     */
     @Override
     public String convert(final String number) throws ParseException {
         Assert.notNull(number);

@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.si.sample.util.Assert;
+
 /**
  * @author Simon Hutchinson
  * 
@@ -84,17 +86,30 @@ public enum Magnitude {
      *         null if no such Magtinute exists
      */
     public Magnitude subtract(final Magnitude magnitude) {
+        Assert.notNull(magnitude);
         return POWER_TO_MAGNITUDE.get(this.power - magnitude.getPowerOfTen());
     }
 
     /**
      * @param magnitude
      *            The {@link Magnitude} to compare with this
-     * @return true if this {@link Magnitude} is greater then the given
+     * @return true if this {@link Magnitude} is greater than the given
      *         {@link Magnitude}
      */
     public boolean isGreaterThan(final Magnitude magnitude) {
-        return getPowerOfTen() > magnitude.getPowerOfTen();
+        Assert.notNull(magnitude);
+        return value > magnitude.getValue();
+    }
+
+    /**
+     * @param magnitude
+     *            The {@link Magnitude} to compare with this
+     * @return true if this {@link Magnitude} is less than the given
+     *         {@link Magnitude}
+     */
+    public boolean isLessThan(final Magnitude magnitude) {
+        Assert.notNull(magnitude);
+        return value < magnitude.getValue();
     }
 
     /**
